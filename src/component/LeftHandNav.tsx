@@ -15,8 +15,8 @@ function LeftHandNav() {
 
 
     function getLi(item:any) {
-        const li = <li>
-                        <div className="listItems" style={{width: "25%"}}>
+        const li = <li className="listItems">
+                        <div className="listItems">
                             {item.name}
                         </div>
                     </li>;
@@ -24,11 +24,15 @@ function LeftHandNav() {
     }
 
     let div = <>
-        <div id="pokemonNav" style={{width: "25%"}}>Pokemon</div>
-        <ul>
+        <div id="pokemonNav" className="listTitle"  style={{width: "25%"}}>
+            <ul className="listItems">
+                <div>
+                    <p>Pokemon</p>
+                </div>
+                {items.map(item =>getLi(item))}
+            </ul>
+        </div>
 
-            {items.map(item =>getLi(item))}
-        </ul>
     </>;
     return div
 }
