@@ -7,6 +7,7 @@ function LeftHandNav() {
     useEffect(()=> {fetchItems();},[])
     let [items, setItems] = useState([])
 
+    let index =0
     let fetchItems= async ()=> {
         let data = await fetch("https://pokeapi.co/api/v2/pokemon/");
         let items = await data.json();
@@ -17,9 +18,11 @@ function LeftHandNav() {
     function getLi(item:any, id:number) {
 
         let li =
-            <Link id={item.name + "-" + id} to={"/components/pokemon/Pokemon"}>
+            <Link id={item.name + "-" + id}
+                  to={{pathname :"/components/pokemon/Pokemon",
+                  state: {item}}}
+                  >
                 <li className="listItems" key={id}>
-
                     <div className="listItems">
                         {item.name}
                     </div>
@@ -39,7 +42,7 @@ function LeftHandNav() {
                 {items.map(item =>getLi(item, ++id))}
             </ul>
         </nav>
-        <Route path="/components/pokemon/Pokemon" component={Pokemon}>
+        <Route path="/components/pokemon/Pokemon" component={Pokemon} >
         </Route>
     </Router>;
     </>;
