@@ -31,9 +31,8 @@ function LeftHandNav() {
         return li;
     }
     let id = 0;
-    let div = <><Router>
-
-
+    let div = <div className="displayInblock">
+        <Router>
         <nav id="pokemonNav" className="listTitle">
             <ul className="listItems">
                 <div>
@@ -45,7 +44,7 @@ function LeftHandNav() {
         <Route path="/components/pokemon/Pokemon" component={Pokemon} >
         </Route>
     </Router>;
-    </>;
+    </div>;
     return div
 }
 export default LeftHandNav;
