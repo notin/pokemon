@@ -1,23 +1,56 @@
 import React, {Component, useState, useEffect } from "react";
-import {useLocation} from "react-router-dom";
-// import "./LeftHandNav.scss"
+
+import {BrowserRouter as Router, Link, Route, useLocation} from "react-router-dom";
+
 
 let Pokemon = () => {
-
-    console.log("Pokemon was clicked")
-    useEffect(()=> {fetchProfile();},[])
-    let [items, setPokemon] = useState([])
+    useEffect(()=> {fetchItems().then(r =>
+        console.log("got pokemon details"))
+    ;},[])
     let props = useLocation();
 
-    let fetchProfile = async ()=> {
+    // @ts-ignore
+    let url = props.state.item.url;
+    let [pokemon, setPokemon] = useState([]);
 
-        let pokeProfile = await fetch("https://pokeapi.co/api/v2/pokemon/1");
-        let info = await pokeProfile.json();
-        setPokemon(info);
+
+    let fetchItems = async () => {
+        let data = await fetch(url);
+        let items = await data.json();
+        setPokemon(items);
     }
 
+// @ts-ignore
+    let getAbilities =(ability)=> {
+        let a =
+            <div className="listItems">
+                {ability.ability.name}
+            </div>
+        return a;
+    }
     // @ts-ignore
-    let div = <div>{props.state.item.name}</div>;
-    return div;
+    let getAbiltiesFromPokeom = (poke) => {
+        let abilities = poke.pokemon.abilities;
+        console.log(abilities);
+        let li =<li className="listItems">
+            {(abilities|| []).map((a : any)=>getAbilities(a))}
+
+        </li>
+        return li;
+    };
+    // @ts-ignore
+    let p = <>{props.state.item.name}</>;
+    let div = <div className="displayInblock">
+
+        <nav id="a" className="listTitle">
+            <div>
+                <p>{p}</p>
+            </div>
+            <ul className="listItems">
+                {getAbiltiesFromPokeom({pokemon})}
+            </ul>
+        </nav>
+    </div>;
+    return div
 };
 export default Pokemon;

@@ -4,19 +4,19 @@ import {BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Pokemon from "./pokemon/Pokemon";
 
 function LeftHandNav() {
-    useEffect(()=> {fetchItems();},[])
+    useEffect(()=> {fetchItems();},[]);
+    // @ts-ignore
+    let url = "https://pokeapi.co/api/v2/pokemon/";
     let [items, setItems] = useState([])
 
-    let index =0
     let fetchItems= async ()=> {
-        let data = await fetch("https://pokeapi.co/api/v2/pokemon/");
+        let data = await fetch(url);
         let items = await data.json();
         setItems(items.results);
     }
 
 
     function getLi(item:any, id:number) {
-
         let li =
             <Link id={item.name + "-" + id}
                   to={{pathname :"/components/pokemon/Pokemon",
@@ -31,9 +31,8 @@ function LeftHandNav() {
         return li;
     }
     let id = 0;
-    let div = <><Router>
-
-
+    let div = <div className="displayInblock">
+        <Router>
         <nav id="pokemonNav" className="listTitle">
             <ul className="listItems">
                 <div>
@@ -45,7 +44,7 @@ function LeftHandNav() {
         <Route path="/components/pokemon/Pokemon" component={Pokemon} >
         </Route>
     </Router>;
-    </>;
+    </div>;
     return div
 }
 export default LeftHandNav;
