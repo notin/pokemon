@@ -45,11 +45,11 @@ let Pokemon = () => {
     };
     // @ts-ignore
     let p = <>{props.state.item.name}</>;
-    let div = <div className="displayInblock">
+    let div = <div >
 
-        <nav id="a">
+        <div id="a" >
             <div>
-                <p>{p}</p>
+                <p className="poke">{p}</p>
             </div>
             <p className="poke">
                 <ul>
@@ -57,7 +57,7 @@ let Pokemon = () => {
                 </ul>
             </p>
 
-        </nav>
+        </div>
     </div>;
     return div
 };

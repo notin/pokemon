@@ -58,9 +58,25 @@ let Ability = () => {
     let effectEntries = <>{abilities.effect_entries}</>;
     let getAbilitInfo =(a: any)=> {
         let div = <div>{a.name}</div>
+        //a.abilities[0].effect_changes[0].effect_entries[1]
+        let col = [];
+        let ab = 0;
+        if(a.abilities != undefined ) {
+            if(a.abilities.length>0 ) {
+                for (let i = 0; i < a.abilities.length; i++) {
+                    try {
+                        let effectEntry = a.abilities[i].effect_entries[0].effect
+                        col.push(<div>{effectEntry}</div>)
+                    }
+                    catch (e){
+
+                    }
+                }
+            }
+        }
         let div1 = <div>
             <div>
-                {(a.abilities|| []).map((a : any)=>getAbilities(a))}
+                {col}
             </div>
         </div>;
         return div1
