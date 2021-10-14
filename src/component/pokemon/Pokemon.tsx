@@ -1,6 +1,7 @@
 import React, {Component, useState, useEffect } from "react";
-
-import {BrowserRouter as Router, Link, Route, useLocation} from "react-router-dom";
+import "./Pokemon.scss"
+import {BrowserRouter as Router, Link, Route, useLocation, useHistory} from "react-router-dom";
+import Ability from "../abilities/Ability";
 
 
 let Pokemon = () => {
@@ -22,17 +23,21 @@ let Pokemon = () => {
 
 // @ts-ignore
     let getAbilities =(ability)=> {
+        setPokemon(ability)
         let a =
-            <div className="listItems">
-                {ability.ability.name}
-            </div>
+            <Link id={ability.name + "-"}
+                  to={{pathname :"/component/abilities/Ability",
+                      state: {ability}}}>
+            </Link>
+        // <Ability ability = {ability}/>
         return a;
     }
     // @ts-ignore
     let getAbiltiesFromPokeom = (poke) => {
         let abilities = poke.pokemon.abilities;
         console.log(abilities);
-        let li =<li className="listItems">
+        let li =
+            <li className="listItems">
             {(abilities|| []).map((a : any)=>getAbilities(a))}
 
         </li>
@@ -42,13 +47,16 @@ let Pokemon = () => {
     let p = <>{props.state.item.name}</>;
     let div = <div className="displayInblock">
 
-        <nav id="a" className="listTitle">
+        <nav id="a">
             <div>
                 <p>{p}</p>
             </div>
-            <ul className="listItems">
-                {getAbiltiesFromPokeom({pokemon})}
-            </ul>
+            <p className="poke">
+                <ul>
+                    {getAbiltiesFromPokeom({pokemon})}
+                </ul>
+            </p>
+
         </nav>
     </div>;
     return div

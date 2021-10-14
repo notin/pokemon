@@ -1,7 +1,8 @@
 import React, {Component, useState, useEffect} from "react";
 import "./LeftHandNav.scss"
-import {BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Route, Link , useHistory} from "react-router-dom";
 import Pokemon from "./pokemon/Pokemon";
+import Ability from "./abilities/Ability";
 
 function LeftHandNav() {
     useEffect(()=> {fetchItems();},[]);
@@ -19,7 +20,7 @@ function LeftHandNav() {
     function getLi(item:any, id:number) {
         let li =
             <Link id={item.name + "-" + id}
-                  to={{pathname :"/components/pokemon/Pokemon",
+                  to={{pathname :"/components/pokemon/Pokemon/"+item.name,
                   state: {item}}}
                   >
                 <li className="listItems" key={id}>
@@ -41,8 +42,8 @@ function LeftHandNav() {
                 {items.map(item =>getLi(item, ++id))}
             </ul>
         </nav>
-        <Route path="/components/pokemon/Pokemon" component={Pokemon} >
-        </Route>
+        <Route path="/components/pokemon/" component={Pokemon} />
+            <Route path="/components/:repo" component={Ability} />
     </Router>;
     </div>;
     return div
