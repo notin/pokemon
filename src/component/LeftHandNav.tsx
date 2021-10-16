@@ -32,20 +32,27 @@ function LeftHandNav() {
         return li;
     }
     let id = 0;
-    let div = <div className="displayInblock">
-        <Router>
-        <nav id="pokemonNav" className="listTitle">
-            <ul className="listItems">
-                <div>
-                    <p>Pokemon</p>
-                </div>
-                {items.map(item =>getLi(item, ++id))}
-            </ul>
-        </nav>
-        <Route path="/components/pokemon/" component={Pokemon} />
-            <Route path="/components/:repo" component={Ability} />
-    </Router>;
-    </div>;
+    let div =
+        <div>
+            <div className="hbox">
+                <Router>
+                    <div id="pokemonNav" >
+                        <ul className="listItems">
+                            <div>
+                                <p>Pokemon</p>
+                            </div>
+                            {items.map(item =>getLi(item, ++id))}
+                        </ul>
+                    </div>
+                    <div>
+                        <Route path="/components/pokemon/" component={Pokemon} />
+                    </div>
+
+
+                </Router>;
+            </div>;
+        </div>
+
     return div
 }
 export default LeftHandNav;

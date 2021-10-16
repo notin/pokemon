@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Link, useLocation} from "react-router-dom";
-
+import "./Abilities.scss"
 
 
 let Ability = () => {
@@ -13,18 +13,19 @@ let Ability = () => {
     let url = props.state.item.url;
     let [abilities, setAbilities] = useState([]);
 
-
     let fetchAbilities= async () => {
         let data = await fetch(url);
         let items = await data.json();
         let abilities1 = items.abilities;
         let denormalized = {
+            "name":"",
             "abilities": []
         }
         for(let i = 0; i< abilities1.length; i++){
             let abilityUrl = abilities1[i].ability.url
             let response = await fetch(abilityUrl);
             let promise = await response.json();
+            denormalized.name = promise.names;
             // @ts-ignore
             denormalized.abilities.push(promise)
         }
@@ -65,8 +66,16 @@ let Ability = () => {
             if(a.abilities.length>0 ) {
                 for (let i = 0; i < a.abilities.length; i++) {
                     try {
-                        let effectEntry = a.abilities[i].effect_entries[0].effect
-                        col.push(<div>{effectEntry}</div>)
+                        let effectEntry = a.abilities[i].effect_entries[0].effect;
+                        let name = a.abilities[1].name
+                        let items =
+                            <div>
+                                <div>
+                                    <p>{name}</p>
+                                </div>
+                                <div>{effectEntry}</div>
+                            </div>
+                        col.push(items);
                     }
                     catch (e){
 
@@ -81,7 +90,7 @@ let Ability = () => {
         </div>;
         return div1
     }
-    return <div>
+    return <div className="abilities">
         {getAbilitInfo(abilities)}
     </div>
 }

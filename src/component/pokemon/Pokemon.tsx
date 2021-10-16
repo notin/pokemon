@@ -54,6 +54,7 @@ let Pokemon = () => {
             <p className="poke">
                 <ul>
                     {getAbiltiesFromPokeom({pokemon})}
+                    <Route path="/components/:repo" component={Ability} />
                 </ul>
             </p>
 
