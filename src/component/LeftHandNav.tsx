@@ -5,17 +5,17 @@ import Pokemon from "./pokemon/Pokemon";
 import Ability from "./abilities/Ability";
 
 function LeftHandNav() {
-    useEffect(()=> {fetchItems();},[]);
+
     // @ts-ignore
     let url = "https://pokeapi.co/api/v2/pokemon/";
     let [items, setItems] = useState([])
+    useEffect(()=> {fetchItems();},[items]);
 
     let fetchItems= async ()=> {
         let data = await fetch(url);
         let items = await data.json();
         setItems(items.results);
     }
-
 
     function getLi(item:any, id:number) {
         let li =

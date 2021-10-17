@@ -5,14 +5,14 @@ import "./Abilities.scss"
 
 
 let Ability = () => {
-    useEffect(()=> {fetchAbilities().then(r =>
-        console.log("got getting ability"))
-    ;},[])
+
     let props = useLocation();
     // @ts-ignore
     let url = props.state.item.url;
     let [abilities, setAbilities] = useState([]);
-
+    useEffect(()=> {fetchAbilities().then(r =>
+        console.log("got getting ability"))
+    ;},[abilities])
     let fetchAbilities= async () => {
         let data = await fetch(url);
         let items = await data.json();
@@ -33,30 +33,30 @@ let Ability = () => {
         setAbilities(denormalized);
     }
     // @ts-ignore
-    let getAbilities =(ability)=> {
-        let a =<div>
-            <div>
-                {ability.name}
-            </div>
-        </div>
-        return a;
-    }
-    // @ts-ignore
-    let getAbiltiesFromPokeom = (poke) => {
-        let abilities = poke.pokemon.abilities;
-        console.log(abilities);
-        let li =
-            <li className="listItems">
-                {(abilities|| []).map((a : any)=>getAbilities(a))}
+    // let getAbilities =(ability)=> {
+    //     let a =<div>
+    //         <div>
+    //             {ability.name}
+    //         </div>
+    //     </div>
+    //     return a;
+    // }
+    // // @ts-ignore
+    // let getAbiltiesFromPokeom = (poke) => {
+    //     let abilities = poke.pokemon.abilities;
+    //     console.log(abilities);
+    //     let li =
+    //         <li className="listItems" key={poke.name}>
+    //             {(abilities|| []).map((a : any)=>getAbilities(a))}
+    //
+    //         </li>
+    //     return li;
+    // };
 
-            </li>
-        return li;
-    };
-
-    // @ts-ignore
-    let abilityName = <>{abilities.name}</>;
-    // @ts-ignore
-    let effectEntries = <>{abilities.effect_entries}</>;
+    // // @ts-ignore
+    // let abilityName = <>{abilities.name}</>;
+    // // @ts-ignore
+    // let effectEntries = <>{abilities.effect_entries}</>;
     let getAbilitInfo =(a: any)=> {
         let div = <div>{a.name}</div>
         //a.abilities[0].effect_changes[0].effect_entries[1]
@@ -69,7 +69,7 @@ let Ability = () => {
                         let effectEntry = a.abilities[i].effect_entries[0].effect;
                         let name = a.abilities[1].name
                         let items =
-                            <div>
+                            <div key={name + i}>
                                 <div>
                                     <p>{name}</p>
                                 </div>
@@ -90,7 +90,7 @@ let Ability = () => {
         </div>;
         return div1
     }
-    return <div className="abilities">
+    return <div className="abilities" key={"key"}>
         {getAbilitInfo(abilities)}
     </div>
 }

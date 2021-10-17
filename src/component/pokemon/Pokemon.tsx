@@ -5,16 +5,13 @@ import Ability from "../abilities/Ability";
 
 
 let Pokemon = () => {
-    useEffect(()=> {fetchItems().then(r =>
-        console.log("got pokemon details"))
-    ;},[])
     let props = useLocation();
-
     // @ts-ignore
     let url = props.state.item.url;
     let [pokemon, setPokemon] = useState([]);
-
-
+    useEffect(()=> {fetchItems().then(r =>
+        console.log("got pokemon details"))
+    ;},[pokemon])
     let fetchItems = async () => {
         let data = await fetch(url);
         let items = await data.json();
@@ -37,7 +34,7 @@ let Pokemon = () => {
         let abilities = poke.pokemon.abilities;
         console.log(abilities);
         let li =
-            <li className="listItems">
+            <li className="listItems" key={poke.name + poke.i}>
             {(abilities|| []).map((a : any)=>getAbilities(a))}
 
         </li>
