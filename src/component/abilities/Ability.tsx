@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useLocation} from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import "./Abilities.scss"
 
 
@@ -12,7 +12,7 @@ let Ability = () => {
     let [abilities, setAbilities] = useState([]);
     useEffect(()=> {fetchAbilities().then(r =>
         console.log("got getting ability"))
-    ;},[abilities])
+    ;},[url])
     let fetchAbilities= async () => {
         let data = await fetch(url);
         let items = await data.json();
@@ -32,34 +32,8 @@ let Ability = () => {
         // @ts-ignore
         setAbilities(denormalized);
     }
-    // @ts-ignore
-    // let getAbilities =(ability)=> {
-    //     let a =<div>
-    //         <div>
-    //             {ability.name}
-    //         </div>
-    //     </div>
-    //     return a;
-    // }
-    // // @ts-ignore
-    // let getAbiltiesFromPokeom = (poke) => {
-    //     let abilities = poke.pokemon.abilities;
-    //     console.log(abilities);
-    //     let li =
-    //         <li className="listItems" key={poke.name}>
-    //             {(abilities|| []).map((a : any)=>getAbilities(a))}
-    //
-    //         </li>
-    //     return li;
-    // };
 
-    // // @ts-ignore
-    // let abilityName = <>{abilities.name}</>;
-    // // @ts-ignore
-    // let effectEntries = <>{abilities.effect_entries}</>;
     let getAbilitInfo =(a: any)=> {
-        let div = <div>{a.name}</div>
-        //a.abilities[0].effect_changes[0].effect_entries[1]
         let col = [];
         let ab = 0;
         if(a.abilities != undefined ) {

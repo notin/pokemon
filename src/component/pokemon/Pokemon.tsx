@@ -1,6 +1,6 @@
-import React, {Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Pokemon.scss"
-import {BrowserRouter as Router, Link, Route, useLocation, useHistory} from "react-router-dom";
+import { Link, Route, useLocation} from "react-router-dom";
 import Ability from "../abilities/Ability";
 
 
@@ -11,7 +11,7 @@ let Pokemon = () => {
     let [pokemon, setPokemon] = useState([]);
     useEffect(()=> {fetchItems().then(r =>
         console.log("got pokemon details"))
-    ;},[pokemon])
+    ;},[url])
     let fetchItems = async () => {
         let data = await fetch(url);
         let items = await data.json();

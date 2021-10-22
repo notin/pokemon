@@ -9,7 +9,7 @@ function LeftHandNav() {
     // @ts-ignore
     let url = "https://pokeapi.co/api/v2/pokemon/";
     let [items, setItems] = useState([])
-    useEffect(()=> {fetchItems();},[items]);
+    useEffect(()=> {fetchItems();},[]);
 
     let fetchItems= async ()=> {
         let data = await fetch(url);
