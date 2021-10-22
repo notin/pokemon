@@ -35,7 +35,7 @@ let Ability = () => {
 
     let getAbilitInfo =(a: any)=> {
         let col = [];
-        let ab = 0;
+        // let ab = 0;
         if(a.abilities != undefined ) {
             if(a.abilities.length>0 ) {
                 for (let i = 0; i < a.abilities.length; i++) {

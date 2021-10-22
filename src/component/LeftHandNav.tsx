@@ -1,15 +1,15 @@
-import React, {Component, useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import "./LeftHandNav.scss"
 import {BrowserRouter as Router, Route, Link , useHistory} from "react-router-dom";
 import Pokemon from "./pokemon/Pokemon";
-import Ability from "./abilities/Ability";
+
 
 function LeftHandNav() {
 
     // @ts-ignore
     let url = "https://pokeapi.co/api/v2/pokemon/";
     let [items, setItems] = useState([])
-    useEffect(()=> {fetchItems();},[]);
+    useEffect(()=> {fetchItems();});
 
     let fetchItems= async ()=> {
         let data = await fetch(url);
