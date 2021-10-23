@@ -1,15 +1,15 @@
-import React, { useState, useEffect} from "react";
+import React, {useState, useEffect, createContext, Context} from "react";
 import "./LeftHandNav.scss"
 import {BrowserRouter as Router, Route, Link , useHistory} from "react-router-dom";
 import Pokemon from "./pokemon/Pokemon";
 
-
 function LeftHandNav() {
 
+    let counter = 0;
     // @ts-ignore
     let url = "https://pokeapi.co/api/v2/pokemon/";
     let [items, setItems] = useState([])
-    useEffect(()=> {fetchItems();});
+    useEffect(()=> {fetchItems();},[counter] );
 
     let fetchItems= async ()=> {
         let data = await fetch(url);
@@ -32,6 +32,7 @@ function LeftHandNav() {
         return li;
     }
     let id = 0;
+    // @ts-ignore
     let div =
         <div>
             <div className="hbox">
@@ -47,12 +48,9 @@ function LeftHandNav() {
                     <div>
                         <Route path="/components/pokemon/" component={Pokemon} />
                     </div>
-
-
                 </Router>;
             </div>;
         </div>
-
     return div
 }
 export default LeftHandNav;

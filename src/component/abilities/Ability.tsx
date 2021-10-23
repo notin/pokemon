@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 
 import { useLocation} from "react-router-dom";
-import "./Abilities.scss"
+import "./Abilities.scss";
+import {PokemonContext} from "../pokemon/Pokemon";
+
 
 
 let Ability = () => {
@@ -10,8 +12,10 @@ let Ability = () => {
     // @ts-ignore
     let url = props.state.item.url;
     let [abilities, setAbilities] = useState([]);
+    let context = useContext(PokemonContext);
     useEffect(()=> {fetchAbilities().then(r =>
-        console.log("got getting ability"))
+        console.log("got getting ability"));
+        console.log(context)
     ;},[url])
     let fetchAbilities= async () => {
         let data = await fetch(url);
@@ -21,6 +25,7 @@ let Ability = () => {
             "name":"",
             "abilities": []
         }
+        let one = []
         for(let i = 0; i< abilities1.length; i++){
             let abilityUrl = abilities1[i].ability.url
             let response = await fetch(abilityUrl);
@@ -40,12 +45,13 @@ let Ability = () => {
             if(a.abilities.length>0 ) {
                 for (let i = 0; i < a.abilities.length; i++) {
                     try {
-                        let effectEntry = a.abilities[i].effect_entries[0].effect;
+                        let effectEntry = a.abilities[i].effect_entries[1].effect;
+                        let one = a.abilities[i].effect_entries[1].effect;
                         let name = a.abilities[1].name
                         let items =
                             <div key={name + i}>
                                 <div>
-                                    <p>{name}</p>
+                                    <p>Ability : {name}</p>
                                 </div>
                                 <div>{effectEntry}</div>
                             </div>

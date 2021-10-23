@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, createContext} from "react";
 import "./Pokemon.scss"
 import { Link, Route, useLocation} from "react-router-dom";
 import Ability from "../abilities/Ability";
 
+let pk = {
+    pokeName : "",
+}
+
+export const PokemonContext  =  createContext(pk);
 
 let Pokemon = () => {
     let props = useLocation();
@@ -26,23 +31,26 @@ let Pokemon = () => {
                   to={{pathname :"/component/abilities/Ability",
                       state: {ability}}}>
             </Link>
-        // <Ability ability = {ability}/>
         return a;
     }
-    // @ts-ignore
-    let getAbiltiesFromPokeom = (poke) => {
-        let abilities = poke.pokemon.abilities;
-        console.log(abilities);
-        let li =
-            <li className="listItems" key={poke.name + poke.i}>
-            {(abilities|| []).map((a : any)=>getAbilities(a))}
-
-        </li>
-        return li;
-    };
+    // // @ts-ignore
+    // let getAbiltiesFromPokeom = (poke) => {
+    //     let abilities = poke.pokemon.abilities;
+    //
+    //     let li =
+    //         <li className="listItems" key={poke.name + poke.i}>
+    //         {(abilities|| []).map((a : any)=>getAbilities(a))}
+    //
+    //     </li>
+    //     return li;
+    // };
     // @ts-ignore
     let p = <>{props.state.item.name}</>;
-    let div = <div >
+    // @ts-ignore
+    pk.pokeName = props.state.item.name;
+    // @ts-ignore
+    let div = <PokemonContext.Provider value={pk.pokeName}>
+        <div >
 
         <div id="a" >
             <div>
@@ -50,13 +58,15 @@ let Pokemon = () => {
             </div>
             <p className="poke">
                 <ul>
-                    {getAbiltiesFromPokeom({pokemon})}
-                    <Route path="/components/:repo" component={Ability} />
+                    {/*{getAbiltiesFromPokeom({pokemon})}*/}
+                    {/*<Route path="/components/:repo" component={Ability} />*/}
+                    <Ability/>
                 </ul>
             </p>
 
         </div>
-    </div>;
+    </div>
+        </PokemonContext.Provider>;
     return div
 };
 export default Pokemon;
