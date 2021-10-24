@@ -33,33 +33,21 @@ let Pokemon = () => {
             </Link>
         return a;
     }
-    // // @ts-ignore
-    // let getAbiltiesFromPokeom = (poke) => {
-    //     let abilities = poke.pokemon.abilities;
-    //
-    //     let li =
-    //         <li className="listItems" key={poke.name + poke.i}>
-    //         {(abilities|| []).map((a : any)=>getAbilities(a))}
-    //
-    //     </li>
-    //     return li;
-    // };
+
     // @ts-ignore
     let p = <>{props.state.item.name}</>;
     // @ts-ignore
     pk.pokeName = props.state.item.name;
     // @ts-ignore
     let div = <PokemonContext.Provider value={pk.pokeName}>
-        <div >
+        <div className="pokeItem ">
 
         <div id="a" >
             <div>
                 <p className="poke">{p}</p>
             </div>
-            <p className="poke">
+            <p >
                 <ul>
-                    {/*{getAbiltiesFromPokeom({pokemon})}*/}
-                    {/*<Route path="/components/:repo" component={Ability} />*/}
                     <Ability/>
                 </ul>
             </p>

@@ -25,7 +25,6 @@ let Ability = () => {
             "name":"",
             "abilities": []
         }
-        let one = []
         for(let i = 0; i< abilities1.length; i++){
             let abilityUrl = abilities1[i].ability.url
             let response = await fetch(abilityUrl);
@@ -45,17 +44,22 @@ let Ability = () => {
             if(a.abilities.length>0 ) {
                 for (let i = 0; i < a.abilities.length; i++) {
                     try {
-                        let effectEntry = a.abilities[i].effect_entries[1].effect;
-                        let one = a.abilities[i].effect_entries[1].effect;
-                        let name = a.abilities[1].name
-                        let items =
-                            <div key={name + i}>
-                                <div>
-                                    <p>Ability : {name}</p>
+                        let filtered = a.abilities[i].effect_entries.filter((x: { language: { name: string; }; })=> x.language.name ==="en");
+                        if( filtered )
+                        {
+                            let effectEntry = filtered[0].effect;
+                            let one = filtered[0].effect;
+                            let name = a.abilities[i].name
+                            let items =
+                                <div key={name + i}>
+                                    <div>
+                                        <p>Ability : {name}</p>
+                                    </div>
+                                    <div>{effectEntry}</div>
                                 </div>
-                                <div>{effectEntry}</div>
-                            </div>
-                        col.push(items);
+                            col.push(items);
+                        }
+
                     }
                     catch (e){
 
