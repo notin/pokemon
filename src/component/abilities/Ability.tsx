@@ -48,7 +48,6 @@ let Ability = () => {
                         if( filtered )
                         {
                             let effectEntry = filtered[0].effect;
-                            let one = filtered[0].effect;
                             let name = a.abilities[i].name
                             let items =
                                 <div key={name + i}>
