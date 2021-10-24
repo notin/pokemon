@@ -48,8 +48,8 @@ function LeftHandNav() {
                     <div>
                         <Route path="/components/pokemon/" component={Pokemon} />
                     </div>
-                </Router>;
-            </div>;
+                </Router>
+            </div>
         </div>
     return div
 }

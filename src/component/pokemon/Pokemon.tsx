@@ -5,6 +5,7 @@ import Ability from "../abilities/Ability";
 
 let pk = {
     pokeName : "",
+    pokeFormUrl : "",
 }
 
 export const PokemonContext  =  createContext(pk);
@@ -20,6 +21,7 @@ let Pokemon = () => {
     let fetchItems = async () => {
         let data = await fetch(url);
         let items = await data.json();
+        pk.pokeFormUrl = items.forms.url
         setPokemon(items);
     }
 
@@ -39,7 +41,7 @@ let Pokemon = () => {
     // @ts-ignore
     pk.pokeName = props.state.item.name;
     // @ts-ignore
-    let div = <PokemonContext.Provider value={pk.pokeName}>
+    let div = <PokemonContext.Provider value={pk}>
         <div className="pokeItem ">
 
         <div id="a" >

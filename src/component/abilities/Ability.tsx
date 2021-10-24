@@ -15,7 +15,7 @@ let Ability = () => {
     let context = useContext(PokemonContext);
     useEffect(()=> {fetchAbilities().then(r =>
         console.log("got getting ability"));
-        console.log(context)
+        console.log(context.pokeName)
     ;},[url])
     let fetchAbilities= async () => {
         let data = await fetch(url);
