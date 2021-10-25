@@ -24,7 +24,7 @@ function LeftHandNav() {
                   state: {item}}}
                   >
                 <li className="listItems" key={id}>
-                    <div className="listItems">
+                    <div >
                         {item.name}
                     </div>
                 </li>
@@ -37,9 +37,9 @@ function LeftHandNav() {
         <div>
             <div className="hbox">
                 <Router>
-                    <div id="pokemonNav" >
-                        <ul className="listItems">
-                            <div>
+                    <div className="list" id="pokemonNav" >
+                        <ul >
+                            <div className="listItems">
                                 <p>Pokemon</p>
                             </div>
                             {items.map(item =>getLi(item, ++id))}

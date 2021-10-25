@@ -7,17 +7,23 @@ import {PokemonContext} from "../pokemon/Pokemon";
 
 
 let Form = () => {
-    let url = ""
-    let [form, setForm] = useState([]);
+    let props = useLocation();
     let context = useContext(PokemonContext);
+    // @ts-ignore
+    let url = props.state.item.url;
+    let [form, setForm] = useState([]);
+
     useEffect(()=> {fetchAbilities().then(r =>
         console.log("got getting form"));
         console.log(context)
     ;},[url])
     let fetchAbilities= async () => {
-        let data = await fetch(context.pokeFormUrl);
+        let data = await fetch(url);
         let items = await data.json();
-        setForm(items);
+        let formUlr = items.forms[0].url;
+        let formJson = await fetch(formUlr)
+        let f = await formJson.json();
+        setForm(f);
     }
 
     // let getAbilitInfo =(a: any)=> {
@@ -56,9 +62,19 @@ let Form = () => {
     //     </div>;
     //     return div1
     // }
-    let meage = form;
-    return <div>
-        "Is mega: "+{meage}
+
+    function getOrder() {
+        // @ts-ignore
+        let order = form.order;
+        return  "form order is " + order;
+    }
+
+    return <div className="base">
+        <div>
+            <p>Form</p>
+        </div>
+        <div>{getOrder()}</div>
+
     </div>
 }
 export default Form;

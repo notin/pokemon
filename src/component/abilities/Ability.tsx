@@ -73,7 +73,7 @@ let Ability = () => {
         </div>;
         return div1
     }
-    return <div className="abilities" key={"key"}>
+    return <div className="abilities base" key={"key"}>
         {getAbilitInfo(abilities)}
     </div>
 }
