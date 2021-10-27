@@ -37,8 +37,8 @@ function LeftHandNav() {
         <div>
             <div className="hbox">
                 <Router>
-                    <div className="list" id="pokemonNav" >
-                        <ul >
+                    <div id="pokemonNav" >
+                        <ul className="list" >
                             <div className="listItems">
                                 <p>Pokemon</p>
                             </div>
