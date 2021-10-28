@@ -11,7 +11,7 @@ let Form = () => {
     let context = useContext(PokemonContext);
     // @ts-ignore
     let url = props.state.item.url;
-    let [form, setForm] = useState([]);
+    const [form, setForm] = useState<any[]>([]);
 
     useEffect(()=> {fetchAbilities().then(r =>
         console.log("got getting form"));
@@ -25,55 +25,29 @@ let Form = () => {
         let f = await formJson.json();
         setForm(f);
     }
-
-    // let getAbilitInfo =(a: any)=> {
-    //     let col = [];
-    //     // let ab = 0;
-    //     if(a.abilities != undefined ) {
-    //         if(a.abilities.length>0 ) {
-    //             for (let i = 0; i < a.abilities.length; i++) {
-    //                 try {
-    //                     let filtered = a.abilities[i].effect_entries.filter((x: { language: { name: string; }; })=> x.language.name ==="en");
-    //                     if( filtered )
-    //                     {
-    //                         let effectEntry = filtered[0].effect;
-    //                         let name = a.abilities[i].name
-    //                         let items =
-    //                             <div key={name + i}>
-    //                                 <div>
-    //                                     <p>Ability : {name}</p>
-    //                                 </div>
-    //                                 <div>{effectEntry}</div>
-    //                             </div>
-    //                         col.push(items);
-    //                     }
-    //
-    //                 }
-    //                 catch (e){
-    //
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     let div1 = <div>
-    //         <div>
-    //             {col}
-    //         </div>
-    //     </div>;
-    //     return div1
-    // }
-
     function getOrder() {
         // @ts-ignore
         let order = form.order;
         return  "form order is " + order;
     }
 
+    function getSrc() {
+        // @ts-ignore
+        let src: string = form.length == undefined ? form['sprites']['front_default'] as string : "";
+        let img = <img src={src}></img>;
+        return img;
+    }
+
     return <div className="base">
-        <div>
-            <p>Form</p>
+        <div className="hbox">
+            <div>
+                <div>
+                    <p>Form</p>
+                </div>
+                <div>{getOrder()}</div>
+            </div>
+            <div>{getSrc()}</div>
         </div>
-        <div>{getOrder()}</div>
 
     </div>
 }
