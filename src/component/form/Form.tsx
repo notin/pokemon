@@ -25,7 +25,14 @@ let Form = () => {
         let f = await formJson.json();
         setForm(f);
     }
+
+    function getType() {
+        // @ts-ignore
+        let type: string = form.length == undefined ? form.types[0].type.name as string : "";
+        return  "type order is " + type;
+    }
     function getOrder() {
+
         // @ts-ignore
         let order = form.order;
         return  "form order is " + order;
@@ -45,6 +52,8 @@ let Form = () => {
                     <p>Form</p>
                 </div>
                 <div>{getOrder()}</div>
+                <p></p>
+                <div>{getType()}</div>
             </div>
             <div>{getSrc()}</div>
         </div>
