@@ -55,7 +55,7 @@ let Form = () => {
                 <p></p>
                 <div>{getType()}</div>
             </div>
-            <div>{getSrc()}</div>
+            <div className="stretch">{getSrc()}</div>
         </div>
 
     </div>
