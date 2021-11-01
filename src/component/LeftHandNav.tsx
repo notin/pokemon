@@ -74,7 +74,7 @@ function LeftHandNav() {
     }
 
 // @ts-ignore
-    let div = <div ref={listInnerRef}>
+    let div = <div className="dark" ref={listInnerRef}>
         <div className="hbox">
             <Router>
                 <div id="pokemonNav">
