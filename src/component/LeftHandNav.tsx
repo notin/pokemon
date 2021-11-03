@@ -2,6 +2,7 @@ import React, {useState, useEffect, createContext, Context, useRef} from "react"
 import "./LeftHandNav.scss"
 import {BrowserRouter as Router, Route, Link , useHistory} from "react-router-dom";
 import Pokemon from "./pokemon/Pokemon";
+import Collapsible from "react-collapsible";
 
 function LeftHandNav() {
 
@@ -10,8 +11,11 @@ function LeftHandNav() {
     // @ts-ignore
     let url = "https://pokeapi.co/api/v2/pokemon/";
     let next = "";
-    let [items, setItems] = useState([])
-    let [urlState, setUrl] = useState([]);
+    let [unfiltered, setUnfiltered] = useState<any[]>([])
+    let [filtered, setFilter] = useState<any[]>([])
+    let [searchTerm, setSearchTerm] = useState<any[]>([])
+    let [items, setItems] = useState<any[]>([])
+    let [urlState, setUrl] = useState<any[]>([]);
     let handleScroll = async ( e:any) => {
         let b = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if ( b) {
@@ -63,18 +67,27 @@ function LeftHandNav() {
     }
     let id = 0;
 
+    let doSearchTerm =(e: any) => {
+        setSearchTerm(e.target.value)
+    }
+    let filter = () => {
+        setUnfiltered(items);
+        let filtered = items.filter(x => x.name.includes(searchTerm));
+        setItems(filtered);
+    }
+
     function getPokeList() {
         // @ts-ignore
         return <ul onScroll={handleScroll} className="list" ref={listInnerRef}>
-            <div className="listItems">
-                <p>Pokemon</p>
-            </div>
+            <Collapsible trigger="Pokemon" className="listItems">
+                <input onChange={doSearchTerm} onBlur={filter}/>
+            </Collapsible >
             {items.map(item => getLi(item, ++id))}
         </ul>;
     }
 
 // @ts-ignore
-    let div = <div ref={listInnerRef}>
+    let div = <div className="dark" ref={listInnerRef}>
         <div className="hbox">
             <Router>
                 <div id="pokemonNav">
