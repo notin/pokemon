@@ -51,15 +51,14 @@ let Pokemon = () => {
     let div = <PokemonContext.Provider value={pk}>
                 <div className="pokeItem ">
                     <div id="list">
-                        <p>
+
                             <ul>
                                 <div className="pokeBase">
-                                    <p>{p}</p>
+                                    {p}
                                 </div>
                                 <Ability/>
                                 {getForm()}
                             </ul>
-                        </p>
                     </div>
                 </div>
             </PokemonContext.Provider>;
