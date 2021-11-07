@@ -3,6 +3,7 @@ import "./Pokemon.scss"
 import { Link, Route, useLocation} from "react-router-dom";
 import Ability from "../abilities/Ability";
 import Form from "../form/Form";
+import Move from "../moves/Move";
 
 let pk = {
     pokeName : "",
@@ -47,7 +48,23 @@ let Pokemon = () => {
         return <Form/>;
     }
 
-    // @ts-ignore
+    let getMoves =() =>{
+
+        let col : any[] =[];
+        if(pokemon.length == undefined) {
+            // @ts-ignore
+            let moves = pokemon.moves;
+            for(let i = 0; i ==0; i++){
+                // @ts-ignore
+                let move = Move(moves[i].move.name, moves[i].move.url);
+                col.push(move)
+            }
+            return col;
+        }
+
+    }
+
+// @ts-ignore
     let div = <PokemonContext.Provider value={pk}>
                 <div className="pokeItem ">
                     <div id="list">
@@ -58,6 +75,7 @@ let Pokemon = () => {
                                 </div>
                                 <Ability/>
                                 {getForm()}
+                                {getMoves()}
                             </ul>
                         </p>
                     </div>

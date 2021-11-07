@@ -1,0 +1,7 @@
+class MoveType {
+    accuracy : string;
+    constructor(a :string){
+        this.accuracy = a;
+    }
+}
+export default MoveType
