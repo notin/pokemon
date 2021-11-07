@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createStore} from "redux";
-import Counter from "./reducer.counter/Counter";
+import {createStore, combineReducers} from "redux";
+
+import counter from "./reducer/Counter";
 
 
 
@@ -15,7 +16,7 @@ const decrement = () => {
     return {type: "decrement"}
 };
 
-let store = createStore(new Counter() as any);
+let store = createStore(counter as any );
 
 store.subscribe(()=> console.log("this is the count " + store.getState()))
 
