@@ -13,7 +13,7 @@ let Ability = () => {
     let url = props.state.item.url;
     let [abilities, setAbilities] = useState<AbilityType>();
     let context = useContext(PokemonContext);
-    useEffect(()=> {fetchAbilities().then(r =>
+    useEffect(()=> {fetchAbilities().then(() =>
         console.log("got getting ability"));
         console.log(context.pokeName)
     ;},[url])

@@ -3,11 +3,7 @@ import "./Pokemon.scss"
 import { Link, Route, useLocation} from "react-router-dom";
 import Ability from "../abilities/Ability";
 import Form from "../form/Form";
-
-let pk = {
-    pokeName : "",
-    pokeFormUrl : "",
-}
+import pk from "../../contexts/pk";
 
 export const PokemonContext  =  createContext(pk);
 
@@ -23,18 +19,14 @@ let Pokemon = () => {
         let data = await fetch(url);
         let items = await data.json();
         pk.pokeFormUrl = items.forms[0].url
+        for(let i = 0 ; i< items.moves.length; i++)
+        {
+            let m = items.moves[i];
+            // @ts-ignore
+            let items1 = { name: m.move.name, url:m.move.url, level_at :m.version_group_details[0].level_learned_at};
+            pk.pokeMoveUrls.push(items1);
+        }
         setPokemon(items);
-    }
-
-// @ts-ignore
-    let getAbilities =(ability)=> {
-        setPokemon(ability)
-        let a =
-            <Link id={ability.name + "-"}
-                  to={{pathname :"/component/abilities/Ability",
-                      state: {ability}}}>
-            </Link>
-        return a;
     }
 
     // @ts-ignore
