@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from "react";
 import { useLocation} from "react-router-dom";
 import {PokemonContext} from "../pokemon/Pokemon";
 import MoveType from "./MoveType";
+import "./Move.scss"
 
 
 let Move = ( index : number) => {
@@ -43,7 +44,7 @@ let Move = ( index : number) => {
         return element;
     }
 
-    return <div>
+    return <div className="moves base">
         {getMove()}
     </div>
 }
