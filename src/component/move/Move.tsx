@@ -22,8 +22,10 @@ let Move = ( index : number) => {
         let data = await fetch(context.pokeMoveUrls[index.index].url);
         let items = await data.json();
 
-        let type = items.type
-        setMoves(type);
+        let type = items.type.name
+        let name = items.name;
+        let moveType = new MoveType(name, type, "");
+        setMoves(moveType);
     }
 
 
@@ -32,7 +34,9 @@ let Move = ( index : number) => {
         // @ts-ignore
         if(move != undefined){
             element = <>
-                {/*<>Move: {context.pokeMoveUrls[index].name}</>*/}
+                <>Move : {move.name}
+                </>
+
                 {move?.type}
             </>;
         }
