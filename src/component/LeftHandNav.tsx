@@ -9,7 +9,7 @@ function LeftHandNav() {
     const listInnerRef = useRef();
     let counter = 0;
     // @ts-ignore
-    let url = "https://pokeapi.co/api/v2/pokemon/";
+    let url = "https://pokeapi.co/api/v2/pokemon/?limit=200";
     let next = "";
     let [unfiltered, setUnfiltered] = useState<any[]>([])
     let [filtered, setFilter] = useState<any[]>([])
@@ -71,8 +71,15 @@ function LeftHandNav() {
         setSearchTerm(e.target.value)
     }
     let filter = () => {
-        setUnfiltered(items);
-        let filtered = items.filter(x => x.name.includes(searchTerm));
+        let toFilterBy = items;
+        if(items.length < unfiltered.length){
+            setItems(unfiltered)
+            toFilterBy = unfiltered;
+        }
+        else {
+            setUnfiltered(items);
+        }
+        let filtered = toFilterBy.filter(x => x.name.includes(searchTerm));
         setItems(filtered);
     }
 
