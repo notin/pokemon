@@ -5,8 +5,11 @@ import {PokemonContext} from "../pokemon/Pokemon";
 import MoveType from "./MoveType";
 import "./Move.scss"
 
+interface IndexProp {
+    index: number;
+}
 
-let Move = ( index : number) => {
+let Move = ( index: IndexProp ) => {
 
     let props = useLocation();
     // @ts-ignore

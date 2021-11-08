@@ -42,7 +42,6 @@ let Pokemon = () => {
     let getMove = () =>{
         let moves : any [] = [];
         for(let i:number = 0; i< pk.pokeMoveUrls.length; i++){
-            // @ts-ignore
             moves.push(<Move index= {i}></Move>)
         }
         return moves;
