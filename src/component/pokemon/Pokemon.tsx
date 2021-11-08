@@ -44,7 +44,7 @@ let Pokemon = () => {
         for(let i:number = 0; i< pk.pokeMoveUrls.length; i++){
             moves.push(<Move index= {i}></Move>)
         }
-        return moves;
+        return <div className="pokeBase"><div>Moves</div>{moves}</div>;
     }
 
 // @ts-ignore

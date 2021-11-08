@@ -37,17 +37,17 @@ let Move = ( index: IndexProp ) => {
         let element = null;
         // @ts-ignore
         if(move != undefined){
-            element = <>
+            element = <div>
                 <>Move : {move.name}
                 </>
 
                 {move?.type}
-            </>;
+            </div>;
         }
         return element;
     }
 
-    return <div className="moves base">
+    return <div>
         {getMove()}
     </div>
 }
