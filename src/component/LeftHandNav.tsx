@@ -100,7 +100,7 @@ function LeftHandNav() {
                 <div id="pokemonNav">
                     {getPokeList()}
                 </div>
-                <div>
+                <div className="list">
                     <Route path="/components/pokemon/" component={Pokemon}/>
                 </div>
             </Router>
