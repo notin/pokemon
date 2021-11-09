@@ -18,7 +18,7 @@ display: flex;
 }
 
 .list{
-  max-height: 500px;
+  max-height: 85vh;
   overflow-y: scroll;
   overflow-x: auto;
 }
@@ -29,13 +29,11 @@ display: flex;
 .dark li{
   background-color: #404147 ;
   color: darkgray;
-  //outline: 1px solid slategrey;
 }
 
 .dark div{
   background-color: #404147 ;
   color: darkgray;
-  //outline: 1px solid slategrey;
 }
 
 
@@ -51,11 +49,14 @@ display: flex;
   position: relative;
 }
 
-.listItems{
-    align-content: center;
-    list-style-type: none;
-    text-align: left;
+.main{
+ max-height: 85vh;
+}
 
+.listItems{
+  align-content: center;
+  list-style-type: none;
+  text-align: left;
   position: relative;
   padding: .5rem 1rem;
   color: #212529;

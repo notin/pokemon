@@ -1,22 +1,23 @@
-.poke {
+.moves {
   //display: none;
-  margin: 25px;
-  padding-left: 20px;
-}
-.pokeItem {
-  box-sizing: border-box;
-  text-align: left;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
+  text-align: -webkit-match-parent;
+  box-sizing: border-box;
 }
 
-.pokeBase{
+.base{
   position: relative;
   padding: .5rem 1rem;
   color: #212529;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,.125) !important;
+}
+
+.stretch {
+  position: relative;
+  padding-left: 50pc;
 }
 .hbox {
   display: flex;

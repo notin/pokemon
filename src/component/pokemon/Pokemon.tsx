@@ -4,6 +4,7 @@ import { Link, Route, useLocation} from "react-router-dom";
 import Ability from "../abilities/Ability";
 import Form from "../form/Form";
 import pk from "../../contexts/pk";
+import Move from "../move/Move";
 
 export const PokemonContext  =  createContext(pk);
 
@@ -33,28 +34,36 @@ let Pokemon = () => {
     let p = <>{props.state.item.name}</>;
     // @ts-ignore
     pk.pokeName = props.state.item.name;
-
     function getForm() {
         // @ts-ignore
         return <Form/>;
     }
 
-    // @ts-ignore
+    let getMove = () =>{
+        let moves : any [] = [];
+        for(let i:number = 0; i< pk.pokeMoveUrls.length; i++){
+            moves.push(<Move index= {i}></Move>)
+        }
+        return <div className="pokeBase"><div>Moves</div>{moves}</div>;
+    }
+
+// @ts-ignore
     let div = <PokemonContext.Provider value={pk}>
-                <div className="pokeItem ">
-                    <div id="list">
-                        <p>
-                            <ul>
-                                <div className="pokeBase">
-                                    <p>{p}</p>
-                                </div>
-                                <Ability/>
-                                {getForm()}
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-            </PokemonContext.Provider>;
+        <div className="pokeItem ">
+            <div id="list">
+                <p>
+                    <ul>
+                        <div className="pokeBase">
+                            <p>{p}</p>
+                        </div>
+                        <Ability/>
+                        {getForm()}
+                        {getMove()}
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </PokemonContext.Provider>;
     return div
 };
 export default Pokemon;
