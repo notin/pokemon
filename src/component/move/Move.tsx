@@ -4,6 +4,7 @@ import { useLocation} from "react-router-dom";
 import {PokemonContext} from "../pokemon/Pokemon";
 import MoveType from "./MoveType";
 import "./Move.scss"
+import Collapsible from "react-collapsible";
 
 interface IndexProp {
     index: number;
@@ -28,7 +29,7 @@ let Move = ( index: IndexProp ) => {
 
         let type = items.type.name
         let name = items.name;
-        let moveType = new MoveType(name, type, "");
+        let moveType = new MoveType(name, type, "", items.accuracy);
         setMoves(moveType);
     }
 
@@ -38,10 +39,14 @@ let Move = ( index: IndexProp ) => {
         // @ts-ignore
         if(move != undefined){
             element = <div>
-                <>Move : {move.name}
-                </>
+                <p>
+                    <>Move : </>
+                    <Collapsible trigger={move.name}>
+                        <div>type : {move.type}</div>
+                        <div>accuracy : {move.accuracy}</div>
+                    </Collapsible>
 
-                {move?.type}
+                </p>
             </div>;
         }
         return element;
