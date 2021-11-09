@@ -5,6 +5,8 @@ import {PokemonContext} from "../pokemon/Pokemon";
 import MoveType from "./MoveType";
 import "./Move.scss"
 import Collapsible from "react-collapsible";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import pk from "../../contexts/pk";
 
 interface IndexProp {
@@ -17,6 +19,7 @@ let Move = ( index: IndexProp ) => {
     // @ts-ignore
     let url = props.state.item.url;
     let [move, setMoves] = useState<MoveType>(url);
+    let [open, setOpen] = useState<boolean>(url);
     let context = useContext(PokemonContext);
     
     useEffect(()=> {fetchMove().then(() =>
@@ -37,6 +40,7 @@ let Move = ( index: IndexProp ) => {
         if(find){
             let moveType = new MoveType(name, type, "", items.accuracy);
             setMoves(moveType);
+            setOpen(false);
         }
         else {
             let message = "move not associated with pokemon : " + name;
@@ -49,17 +53,24 @@ let Move = ( index: IndexProp ) => {
             }
         }
     }
+    let redirectClick= (element: any) =>{
+        setOpen(!open);
+    }
 
-    function getMove() {
+     let getMove = () => {
         let element = null;
         // @ts-ignore
         if(move != undefined && move.name != undefined){
             element = <div id = {move.name}>
                 <p>
-                    <Collapsible trigger={ "Move: "+ move.name}>
-                        <div>type : {move.type}</div>
-                        <div>accuracy : {move.accuracy}</div>
-                    </Collapsible>
+                    <div className="hbox">
+                        <Collapsible id = {"collapseMove"+move.name} open={open} trigger={ "Move: "+ move.name}>
+                            <div>type : {move.type}</div>
+                            <div>accuracy : {move.accuracy}</div>
+                        </Collapsible>
+                        <FontAwesomeIcon onClick={redirectClick} className="icon" icon={faArrowDown}></FontAwesomeIcon>
+                    </div>
+
                 </p>
             </div>;
         }
