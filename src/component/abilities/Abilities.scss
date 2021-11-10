@@ -6,6 +6,16 @@
   box-sizing: border-box;
 }
 
+.abilities-collapse{
+max-width: 10pc;
+}
+
+.hbox {
+  display: flex;
+  flex-direction: row !important;
+  position: relative;
+}
+
 .base{
   position: relative;
   padding: .5rem 1rem;

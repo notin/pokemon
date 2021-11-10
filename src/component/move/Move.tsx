@@ -33,7 +33,6 @@ let Move = ( index: IndexProp ) => {
 
         let type = items.type.name
         let name = items.name;
-        let url = items.url;
 
         // @ts-ignore
         let find = items.learned_by_pokemon.find(x=>x.name == pk.pokeName);
@@ -64,7 +63,7 @@ let Move = ( index: IndexProp ) => {
             element = <div id = {move.name}>
                 <p>
                     <div className="hbox">
-                        <Collapsible id = {"collapseMove"+move.name} open={open} trigger={ "Move: "+ move.name}>
+                        <Collapsible open={open} trigger={ "Move: "+ move.name}>
                             <div>type : {move.type}</div>
                             <div>accuracy : {move.accuracy}</div>
                         </Collapsible>
