@@ -6,7 +6,11 @@ import {PokemonContext} from "../pokemon/Pokemon";
 import AbilityType from "./AbilityType";
 import AbilityDetails from "./AbilityDetails";
 
-let Ability = () => {
+interface IndexProp {
+    index: number;
+}
+
+let Ability = (index: IndexProp ) => {
 
     let props = useLocation();
     // @ts-ignore
@@ -18,17 +22,11 @@ let Ability = () => {
         console.log(context.pokeName)
     ;},[url])
     let fetchAbilities= async () => {
-        let data = await fetch(url);
+        let data = await fetch(context.pokeAbilityUrls[index.index].url);
         let items = await data.json();
-        let abilities1 = items.abilities;
 
-        for(let i = 0; i< abilities1.length; i++){
-            let abilityUrl = abilities1[i].ability.url
-            let response = await fetch(abilityUrl);
-            let promise = await response.json();
-            let denormalized = new AbilityType(promise.name, promise.effect_entries)
-            setAbilities(denormalized);
-        }
+        let denormalized = new AbilityType(items.name, items.effect_entries)
+        setAbilities(denormalized);
     }
 
     let getAbilitInfo =(a: AbilityType)=> {

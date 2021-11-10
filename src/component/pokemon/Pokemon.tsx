@@ -20,6 +20,13 @@ let Pokemon = () => {
         let data = await fetch(url);
         let items = await data.json();
         pk.pokeFormUrl = items.forms[0].url
+        for(let i = 0 ; i< items.abilities.length; i++)
+        {
+            let a = items.abilities[i];
+            // @ts-ignore
+            let items1 = { name: a.ability.name, url:a.ability.url};
+            pk.pokeAbilityUrls.push(items1);
+        }
         for(let i = 0 ; i< items.moves.length; i++)
         {
             let m = items.moves[i];
@@ -47,6 +54,14 @@ let Pokemon = () => {
         return <div className="pokeBase"><div>Moves</div>{moves}</div>;
     }
 
+    function getAbility() {
+        let abilities: any [] = [];
+        for(let i:number = 0; i< pk.pokeAbilityUrls.length; i++){
+            abilities.push(<Ability index={i}/>)
+        }
+        return <div className="pokeBase"><div>Abiliteis</div>{abilities}</div>;
+    }
+
 // @ts-ignore
     let div = <PokemonContext.Provider value={pk}>
         <div className="pokeItem ">
@@ -56,7 +71,7 @@ let Pokemon = () => {
                         <div className="pokeBase">
                             <p>{p}</p>
                         </div>
-                        <Ability/>
+                        {getAbility()}
                         {getForm()}
                         {getMove()}
                     </ul>
