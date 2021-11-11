@@ -71,8 +71,8 @@ let Pokemon = () => {
                         <div className="pokeBase">
                             <p>{p}</p>
                         </div>
-                        {getAbility()}
                         {getForm()}
+                        {getAbility()}
                         {getMove()}
                     </ul>
                 </p>

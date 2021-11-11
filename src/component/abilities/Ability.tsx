@@ -28,10 +28,24 @@ let Ability = (index: IndexProp ) => {
     let fetchAbilities= async () => {
         let data = await fetch(context.pokeAbilityUrls[index.index].url);
         let items = await data.json();
+        // @ts-ignore
+        let find = items.pokemon.find(x=>x.pokemon.name == context.pokeName);
+        if(find) {
+            let denormalized = new AbilityType(items.name, items.effect_entries)
+            setAbilities(denormalized);
+            setOpen(false);
+        }
+        else {
+            let message = "ability not associated with pokemon : " + items.name;
+            console.log(message);
+            let elementById = document.getElementById(items.name);
+            if(elementById) {
+                message = "ability move not associated with pokemon : " + items.name;
+                console.log(message);
+                elementById.remove();
+            }
+        }
 
-        let denormalized = new AbilityType(items.name, items.effect_entries)
-        setAbilities(denormalized);
-        setOpen(false);
     }
     let redirectClick= () =>{
         setOpen(!open);
@@ -43,10 +57,12 @@ let Ability = (index: IndexProp ) => {
             let abilities1 = a.abilities;
             if(abilities1 != undefined ) {
                 let effectEntries : AbilityDetails = abilities1 as unknown as AbilityDetails;
-                let items = <div key={a.name }>
+                let items = <div id={a.name}>
                     <div className="hbox">
                         <Collapsible className="abilities-collapse" open={open} trigger={ "Ability : "+a.name}>
+                            <p>
                             {effectEntries.effect}
+                            </p>
                         </Collapsible>
                         <FontAwesomeIcon onClick={redirectClick} className="icon" icon={faArrowDown}></FontAwesomeIcon>
                     </div>
