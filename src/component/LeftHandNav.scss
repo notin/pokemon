@@ -19,8 +19,8 @@ display: flex;
 
 .list{
   max-height: 85vh;
-  overflow-y: scroll;
-  overflow-x: auto;
+  overflow-y: auto;
+  //overflow-x: auto;
 }
 .list ::-webkit-scrollbar{
   scrollbar-color: black;

@@ -3,7 +3,7 @@ import AbilityDetails from "./AbilityDetails";
 
 class AbilityType {
     name: string;
-    abilities : AbilityType | undefined;
+    abilities : AbilityDetails[]=[];
     constructor(name:string, abilitiesParam:AbilityDetails[]){
         this.name = name;
         // this.abilities = abilities;

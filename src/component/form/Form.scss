@@ -1,5 +1,4 @@
 .abilities {
-  //display: none;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
   text-align: -webkit-match-parent;
@@ -16,8 +15,8 @@
 }
 
 .stretch {
-  position: relative;
-  padding-left: 50pc;
+  //position: relative;
+  align-content: flex-end;
 }
 .hbox {
   display: flex;

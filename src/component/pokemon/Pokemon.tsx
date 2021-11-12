@@ -5,6 +5,9 @@ import Ability from "../abilities/Ability";
 import Form from "../form/Form";
 import pk from "../../contexts/pk";
 import Move from "../move/Move";
+import ActionSideBar from "../ActionsSideBar/ActionSideBar";
+import {faArrowDown, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const PokemonContext  =  createContext(pk);
 
@@ -13,6 +16,8 @@ let Pokemon = () => {
     // @ts-ignore
     let url = props.state.item.url;
     let [pokemon, setPokemon] = useState([]);
+    let [actionsVisible, setActionsVisible] = useState(url);
+    let [titleClass, setTitleClass] = useState(actionsVisible);
     useEffect(()=> {fetchItems().then(r =>
         console.log("got pokemon details"))
     ;},[url])
@@ -20,6 +25,13 @@ let Pokemon = () => {
         let data = await fetch(url);
         let items = await data.json();
         pk.pokeFormUrl = items.forms[0].url
+        for(let i = 0 ; i< items.abilities.length; i++)
+        {
+            let a = items.abilities[i];
+            // @ts-ignore
+            let items1 = { name: a.ability.name, url:a.ability.url};
+            pk.pokeAbilityUrls.push(items1);
+        }
         for(let i = 0 ; i< items.moves.length; i++)
         {
             let m = items.moves[i];
@@ -28,6 +40,14 @@ let Pokemon = () => {
             pk.pokeMoveUrls.push(items1);
         }
         setPokemon(items);
+        setActionsVisible(true)
+        setTitleClass("pokeTitleLarge");
+    }
+
+    let toggleActions=()=> {
+        setActionsVisible(!actionsVisible);
+        let titleClazz = titleClass == "pokeTitleLarge" ? "pokeTitleMinimized":"pokeTitleLarge";
+        setTitleClass(titleClazz);
     }
 
     // @ts-ignore
@@ -47,17 +67,30 @@ let Pokemon = () => {
         return <div className="pokeBase"><div>Moves</div>{moves}</div>;
     }
 
+    function getAbility() {
+        let abilities: any [] = [];
+        for(let i:number = 0; i< pk.pokeAbilityUrls.length; i++){
+            abilities.push(<Ability index={i}/>)
+        }
+        return <div className="pokeBase"><div>Abiliteis</div>{abilities}</div>;
+    }
+
 // @ts-ignore
     let div = <PokemonContext.Provider value={pk}>
         <div className="pokeItem ">
             <div id="list">
                 <p>
                     <ul>
-                        <div className="pokeBase">
-                            <p>{p}</p>
+                        <div className="pokeBase hbox collapse" >
+                            <div className={titleClass}>
+                                <p>{p}</p>
+                            </div>
+
+                            <FontAwesomeIcon onClick={toggleActions} className="actionOptionArrow" icon={faArrowLeft}></FontAwesomeIcon>
+                            <div hidden={actionsVisible}><ActionSideBar></ActionSideBar></div>
                         </div>
-                        <Ability/>
                         {getForm()}
+                        {getAbility()}
                         {getMove()}
                     </ul>
                 </p>
