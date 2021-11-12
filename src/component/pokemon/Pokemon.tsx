@@ -5,6 +5,9 @@ import Ability from "../abilities/Ability";
 import Form from "../form/Form";
 import pk from "../../contexts/pk";
 import Move from "../move/Move";
+import ActionSideBar from "../ActionsSideBar/ActionSideBar";
+import {faArrowDown, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const PokemonContext  =  createContext(pk);
 
@@ -13,6 +16,8 @@ let Pokemon = () => {
     // @ts-ignore
     let url = props.state.item.url;
     let [pokemon, setPokemon] = useState([]);
+    let [actionsVisible, setActionsVisible] = useState(url);
+    let [titleClass, setTitleClass] = useState(actionsVisible);
     useEffect(()=> {fetchItems().then(r =>
         console.log("got pokemon details"))
     ;},[url])
@@ -35,6 +40,14 @@ let Pokemon = () => {
             pk.pokeMoveUrls.push(items1);
         }
         setPokemon(items);
+        setActionsVisible(true)
+        setTitleClass("pokeTitleLarge");
+    }
+
+    let toggleActions=()=> {
+        setActionsVisible(!actionsVisible);
+        let titleClazz = titleClass == "pokeTitleLarge" ? "pokeTitleMinimized":"pokeTitleLarge";
+        setTitleClass(titleClazz);
     }
 
     // @ts-ignore
@@ -68,8 +81,13 @@ let Pokemon = () => {
             <div id="list">
                 <p>
                     <ul>
-                        <div className="pokeBase">
-                            <p>{p}</p>
+                        <div className="pokeBase hbox collapse" >
+                            <div className={titleClass}>
+                                <p>{p}</p>
+                            </div>
+
+                            <FontAwesomeIcon onClick={toggleActions} className="icon" icon={faArrowLeft}></FontAwesomeIcon>
+                            <div hidden={actionsVisible}><ActionSideBar></ActionSideBar></div>
                         </div>
                         {getForm()}
                         {getAbility()}

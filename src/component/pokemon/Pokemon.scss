@@ -9,7 +9,21 @@
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
-
+.pokeTitleLarge {
+  width: 90pc;
+}
+.pokeTitleMinimized {
+  width: 50pc;
+}
+.collapse {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  transition: 0.4s max-width;
+}
+.collapse > div {
+  overflow: auto;
+}
 .pokeBase{
   position: relative;
   padding: .5rem 1rem;
