@@ -28,14 +28,13 @@ let Pokemon = () => {
         for(let i = 0 ; i< items.abilities.length; i++)
         {
             let a = items.abilities[i];
-            // @ts-ignore
+
             let items1 = { name: a.ability.name, url:a.ability.url};
             pk.pokeAbilityUrls.push(items1);
         }
         for(let i = 0 ; i< items.moves.length; i++)
         {
             let m = items.moves[i];
-            // @ts-ignore
             let items1 = { name: m.move.name, url:m.move.url, level_at :m.version_group_details[0].level_learned_at};
             pk.pokeMoveUrls.push(items1);
         }
@@ -55,7 +54,6 @@ let Pokemon = () => {
     // @ts-ignore
     pk.pokeName = props.state.item.name;
     function getForm() {
-        // @ts-ignore
         return <Form/>;
     }
 
@@ -75,7 +73,6 @@ let Pokemon = () => {
         return <div className="pokeBase"><div>Abiliteis</div>{abilities}</div>;
     }
 
-// @ts-ignore
     let div = <PokemonContext.Provider value={pk}>
         <div className="pokeItem ">
             <div id="list">
