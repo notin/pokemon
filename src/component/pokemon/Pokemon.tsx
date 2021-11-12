@@ -86,7 +86,7 @@ let Pokemon = () => {
                                 <p>{p}</p>
                             </div>
 
-                            <FontAwesomeIcon onClick={toggleActions} className="icon" icon={faArrowLeft}></FontAwesomeIcon>
+                            <FontAwesomeIcon onClick={toggleActions} className="actionOptionArrow" icon={faArrowLeft}></FontAwesomeIcon>
                             <div hidden={actionsVisible}><ActionSideBar></ActionSideBar></div>
                         </div>
                         {getForm()}
